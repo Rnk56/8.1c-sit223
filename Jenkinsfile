@@ -21,15 +21,16 @@ pipeline {
             }
             post {
                 success {
-                    mail to: 'ronik5819@gmail.com',
-                        subject: 'Unit and Integration Tests stage Passed',
-                        body: 'The Unit and Integration Tests stage completed successfully.'
+                    emailext (
+                        to: "ronik5819@gmail.com",
+                        subject: "Unit and Integration Tests stage Passed",
+                        body: "The Unit and Integration Tests stage completed successfully."
                         attachmentsPattern: 'test.log'
                 }
                 failure {
-                    mail to: 'ronik5819@gmail.com',
-                        subject: 'Unit and Integration Tests stage Failed',
-                        body: 'The Unit and Integration Tests stage failed, please re-check and fix.'
+                    emailext to: "ronik5819@gmail.com",
+                        subject: "Unit and Integration Tests stage Failed",
+                        body: "The Unit and Integration Tests stage failed, please re-check and fix."
                         attachmentsPattern: 'test.log'
                 }
             }
@@ -52,16 +53,16 @@ pipeline {
             }
             post {
                 success {
-                    mail to: 'ronik5819@gmail.com',
-                        subject: 'Security Scan stage Passed',
-                        body: 'Security stage stage completed successfully.'
-                        attachmentsPattern: 'security.log'
+                    emailext to: "ronik5819@gmail.com",
+                        subject: "Security Scan stage Passed",
+                        body: "Security stage stage completed successfully."
+                        attachmentsPattern: "security.log"
                 }
                 failure {
-                    mail to: 'ronik5819@gmail.com',
-                        subject: 'Security Scan stage Failed',
-                        body: 'Security Scan stage failed, please re-check and fix.'
-                        attachmentsPattern: 'security.log'
+                    emailext to: "ronik5819@gmail.com",
+                        subject: "Security Scan stage Failed",
+                        body: "Security Scan stage failed, please re-check and fix."
+                        attachmentsPattern: "security.log"
                 }
             }
         }
