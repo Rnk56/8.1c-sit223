@@ -17,7 +17,21 @@ pipeline {
         
         stage("Unit and Integration Tests") {
             steps {
-                sh "echo 'Using JUnit to run unit tests'"
+                sh "echo 'Using JUnit to run unit tests' > test.log"
+            }
+            post {
+                success {
+                    mail to: 'ronik5819@gmail.com',
+                        subject: 'Unit and Integration Tests stage Passed',
+                        body: 'The Unit and Integration Tests stage completed successfully.'
+                        attachmentsPattern: 'test.log'
+                }
+                failure {
+                    mail to: 'ronik5819@gmail.com',
+                        subject: 'Unit and Integration Tests stage Failed',
+                        body: 'The Unit and Integration Tests stage failed, please re-check and fix.'
+                        attachmentsPattern: 'test.log'
+                }
             }
         }
 
@@ -34,10 +48,24 @@ pipeline {
 
         stage("Security Scan") {
             steps {
-                sh "echo 'Using DAST to identify any vulnerabilities'"
+                sh "echo 'Using DAST to identify any vulnerabilities' > security.log"
+            }
+            post {
+                success {
+                    mail to: 'ronik5819@gmail.com',
+                        subject: 'Security Scan stage Passed',
+                        body: 'Security stage stage completed successfully.'
+                        attachmentsPattern: 'security.log'
+                }
+                failure {
+                    mail to: 'ronik5819@gmail.com',
+                        subject: 'Security Scan stage Failed',
+                        body: 'Security Scan stage failed, please re-check and fix.'
+                        attachmentsPattern: 'security.log'
+                }
             }
         }
-
+   
     //Stage 5: Deploy to Staging – Deploy the application to a staging server (e.g., AWS EC2 instance).
         
         stage("Deploy to Staging") {
