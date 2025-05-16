@@ -60,15 +60,5 @@ pipeline {
                 sh "echo 'Using AWS EC2 to reploy the application to a production server'"
             }
         }
-          
-//Stage 8: TRIGGER CHECK
-        
-        stage("TRIGGER COMMIT CHECK ") {
-            steps {
-                sh "CHECKING AFTER COMMIT'"
-            }
-        }
-    
-
     }
 }
